@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante Riorta | Agualva-Cacém</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8B0000; /* Vermelho tradicional */
+            --secondary-color: #D97706; /* Laranja/Ouro */
+            --dark-color: #1F2937;
+            --light-color: #F9FAFB;
+            --gray-color: #6B7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        /* Header / Navegação */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .rating-badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .stars {
+            color: #FBBF24;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #6B0000;
+        }
+
+        /* Content Sections */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            display: block;
+            margin: 0.5rem auto 0;
+        }
+
+        /* Serviços / Destaques */
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .feature-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: 250px;
+        }
+
+        .feature-box i {
+            font-size: 2rem;
+            color: var(--secondary-color);
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-card-body {
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .menu-card-body h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .popular-tag {
+            background-color: var(--secondary-color);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Info & Contactos */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .info-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Em produção adicionaria um menu hambúrguer */
+            }
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegação -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Restaurante Riorta</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#destaques">Destaques</a></li>
+                <li><a href="#contacto">Contacto & Horário</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Restaurante Riorta</h2>
+        <p>A melhor cozinha tradicional portuguesa em Agualva-Cacém</p>
+        <div class="rating-badge">
+            <span class="stars"><i class="fas fa-star"></i> 4,3</span>
+            <span>(341 avaliações)</span>
+            <span>•</span>
+            <span>10 € - 15 € / pessoa</span>
+        </div>
+        <a href="tel:214261187" class="btn"><i class="fas fa-phone"></i> Ligar para Reservar</a>
+    </section>
+
+    <!-- Serviços -->
+    <div class="container">
+        <div class="features">
+            <div class="feature-box">
+                <i class="fas fa-utensils"></i>
+                <div>
+                    <h4>Comer no local</h4>
+                    <small>Ambiente acolhedor</small>
+                </div>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-bag-shopping"></i>
+                <div>
+                    <h4>Take Away</h4>
+                    <small>Leve para casa</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Destaques do Menu -->
+        <section id="destaques">
+            <h2 class="section-title">Pratos Populares & Destaques</h2>
+            <div class="menu-grid">
+
+                <div class="menu-card">
+                    <div class="menu-card-body">
+                        <span class="popular-tag">Popular</span>
+                        <h3>Francesinha à Riorta</h3>
+                        <p style="color: var(--gray-color);">Especialidade da casa</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-card-body">
+                        <span class="popular-tag">Popular</span>
+                        <h3>Cozido à Portuguesa</h3>
+                        <p style="color: var(--gray-color);">Sabor tradicional caseiro</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-card-body">
+                        <h3>Secretos de Porco Preto</h3>
+                        <p style="color: var(--gray-color);">Grelhados na perfeição</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-card-body">
+                        <h3>Ensopado de Borrego</h3>
+                        <p style="color: var(--gray-color);">Rico em tempero e tradição</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-card-body">
+                        <h3>Sardinhas Assadas</h3>
+                        <p style="color: var(--gray-color);">Sempre frescas</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-card-body">
+                        <h3>Arroz Doce</h3>
+                        <p style="color: var(--gray-color);">A sobremesa perfeita</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Informações e Contacto -->
+        <section id="contacto" style="margin-top: 4rem;">
+            <h2 class="section-title">Onde Estamos & Contacto</h2>
+            <div class="info-grid">
+                
+                <div class="info-card">
+                    <h3>Informações Úteis</h3>
+                    <br>
+                    <div class="info-item">
+                        <i class="fas fa-location-dot"></i>
+                        <div>
+                            <strong>Morada</strong><br>
+                            R. Cotão Novo n 12<br>
+                            2735-500 Agualva-Cacém
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Telefone</strong><br>
+                            <a href="tel:214261187" style="color: inherit; text-decoration: none;">21 426 1187</a>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Horário de Funcionamento</strong><br>
+                            Aberto diariamente ⋅ Fecha às 20:00
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-wallet"></i>
+                        <div>
+                            <strong>Preço Médio</strong><br>
+                            10 € - 15 € por pessoa
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card" style="display: flex; flex-direction: column; justify-content: center; text-align: center;">
+                    <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                    <h3>Visite-nos em Agualva-Cacém</h3>
+                    <p style="margin: 1rem 0; color: var(--gray-color);">Estamos de portas abertas para lhe servir as melhores refeições tradicionais.</p>
+                    <a href="https://maps.google.com/?q=R.+Cot%C3%A3o+Novo+n+12,+2735-500+Agualva-Cac%C3%A9m" target="_blank" class="btn" style="align-self: center;">Obter Direções no GPS</a>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 Restaurante Riorta - Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
